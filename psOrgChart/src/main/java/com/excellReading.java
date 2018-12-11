@@ -68,11 +68,11 @@ public class excellReading {
                     }
                 }
 
-                data.put(rowCnt, obj);
-                rowCnt++;
+
 
             }
-
+            data.put(rowCnt, obj);
+            rowCnt++;
         }
         return data;
     }
