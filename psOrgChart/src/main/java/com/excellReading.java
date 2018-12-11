@@ -14,15 +14,59 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class excellReading {
 
-    // public Workbook workbook= null;
-    // public Sheet firstSheet= null;
 
-    private static final String INPUT_XLS = "/Users/bartowb/Documents/HackathonData.xlsx";
+    //private static final String INPUT_XLS = "HackathonData.xlsx";
+    private static Map<Integer, List<String>> data_set;
+    private static Map<Integer, List<Integer>> organized_set = new HashMap<Integer, List<Integer>>();
+    
+    public static Map<Integer, List<String>> GetRawData() {
+        return data_set;
+    }
+    
+    public static Map<Integer, List<Integer>> GetSortedData() {
+        return organized_set;
+    }
+    
+    public static void LoadDataSet(String filename) {
+        try
+        {
+            ReadExcel(filename);
+            AssociateMapToSet();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        
+    }
+    
+    public static void AssociateMapToSet() {
+            
+            int indexCount = 0;
+            //int index = 0;
+            int rootIndex = 0;
+            //Root Var == Hardepp 'Blank'
+            List<Integer> rootResult = new ArrayList<Integer>();
+            
+            for(List<String> valueList : data_set.values()) {
+                if(valueList.get(2) == "Blank") {
+                   
+                    rootResult = getFilterOutput(data_set, valueList.get(0)); 
+                    organized_set.put(indexCount,rootResult);
+                    rootIndex = indexCount;
+                }
+                else
+                {
+                    List<Integer> result = getFilterOutput(data_set, valueList.get(0));    
+                    organized_set.put(indexCount,result);
+                }
+                
+                indexCount++;
+            }
+    }
 
 
-    public static Map<Integer, List<String>> ReadExcel() throws IOException {
+    public static Map<Integer, List<String>> ReadExcel(String filename) throws IOException {
 
-        FileInputStream inputStream = new FileInputStream(new File(INPUT_XLS));
+        FileInputStream inputStream = new FileInputStream(new File(filename));
 
         Map<Integer, List<String>> data = new HashMap<Integer, List<String>>();
 
@@ -74,6 +118,20 @@ public class excellReading {
             data.put(rowCnt, obj);
             rowCnt++;
         }
+        
+        data_set = data;
         return data;
+    }
+    
+    private static List<Integer> getFilterOutput(Map<Integer, List<String>> data, String filter) {
+        List<Integer> result = new ArrayList<Integer>();
+
+        for (int line : data.keySet()) {
+            if(data.get(line).get(3) == filter) {
+                result.add(line);
+            }
+        }
+        
+        return result;
     }
 }
