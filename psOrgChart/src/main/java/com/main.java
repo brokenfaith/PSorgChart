@@ -38,8 +38,6 @@ public class main {
             int indexCount = 0;
             //int index = 0;
             int rootIndex = 0;
-            
-            com.psOrgChartFrame frame = new com.psOrgChartFrame();
             //Root Var == Hardepp 'Blank'
             List<Integer> rootResult = new ArrayList<Integer>();
             
@@ -59,6 +57,8 @@ public class main {
                 
                 indexCount++;
             }
+            
+            com.psOrgChartFrame frame = new com.psOrgChartFrame(organized_data, data);
             
             System.out.println(organized_data.get(rootIndex));
                    

@@ -26,45 +26,32 @@ public class psOrgChartFrame extends javax.swing.JFrame {
     
      public psOrgChartFrame(Map<Integer, List<Integer>> data_sort, Map<Integer, List<String>> data) {
         initComponents();
-        GenerateOrgChart(/* DataSet */);
+        this.setLayout(new java.awt.FlowLayout());
+        
+        
+        GenerateOrgUnit("Cody Jones", "Custom Technical Success Consultant");
+        
+        this.pack();
+        this.setVisible(true);
     }
     
     //Position Vars
-    private int rowHeight = 75;
-    private int rowWidth = 75;
-    private int rows = 5;
-    private int columns = 5;
-    
-    public com.psOrgUnitPanel FillerPanel() {
-        com.psOrgUnitPanel filler = new com.psOrgUnitPanel("Cody Test", "Test");
-        filler.setPreferredSize(new java.awt.Dimension(125,75));
-        filler.setBackground(this.getBackground());
-        filler.setVisible(false);
-        
-        return filler;
-    }
-    
     public void GenerateOrgUnit(String name, String title) {
         this.add(new com.psOrgUnitPanel(name, title));
     }
     
+    /*
+    Used this function for testing
     public void GenerateOrgChart() {
         int width = getContentPane().getWidth();
         
         //com.psOrgUnitPanel OrgUnit = 
         this.setLayout(new java.awt.FlowLayout());
         
-        this.add(FillerPanel());
-        this.add(FillerPanel());
         this.add(new com.psOrgUnitPanel("Hardeep Gulati", "Chief Executive Officer"));
-        this.add(FillerPanel());
-        this.add(FillerPanel());
         
-        this.add(FillerPanel());
-        this.add(FillerPanel());
         this.add(new com.psOrgUnitPanel("Marke Oldemeyer", "Cheif Financial Officer"));
-        this.add(FillerPanel());
-        this.add(FillerPanel());
+
         
         this.add(new com.psOrgUnitPanel("Marke Oldemeyer", "Cheif Financial Officer"));
         this.add(new com.psOrgUnitPanel("Marke Oldemeyer", "Cheif Financial Officer"));
@@ -86,8 +73,9 @@ public class psOrgChartFrame extends javax.swing.JFrame {
         
         this.pack();
         this.setVisible(true);
-    }
-
+    }*/
+    
+   
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
