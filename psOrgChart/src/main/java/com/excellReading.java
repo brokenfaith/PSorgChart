@@ -3,14 +3,15 @@ package com;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.io.PrintStream;
+import java.util.*;
 
+import com.Data;
 import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.json.JSONObject;
+
 
 public class excellReading {
 
@@ -64,20 +65,28 @@ public class excellReading {
     }
 
 
-    public static Map<Integer, List<String>> ReadExcel(String filename) throws IOException {
+    public static JSONObject ReadExcel(String filename) throws IOException {
 
         FileInputStream inputStream = new FileInputStream(new File(filename));
 
-        Map<Integer, List<String>> data = new HashMap<Integer, List<String>>();
-
+        //Create Workbook instance holding reference to file
         Workbook workbook = new XSSFWorkbook(inputStream);
 
-        Sheet firstSheet = workbook.getSheetAt(0);
+        //Get first sheet from workbook
+        Sheet sheet = workbook.getSheetAt(0);
 
-        Iterator<Row> iterator = firstSheet.iterator();
+        //Our POJO for storing the excel data
+        Data excelData = new Data();
 
-        // Test test=new Test();
+        //Row iterator
+        Iterator<Row> iterator = sheet.iterator();
+
+//        //Hash map to store excel data
+        Map<Integer, List<String>> Data = new HashMap<Integer, List<String>>();
+
+//        // Test test=new Test();
         int rowCnt = 0;
+
 
         while (iterator.hasNext()) {
             Row nextRow = iterator.next();
@@ -111,16 +120,21 @@ public class excellReading {
                         obj.add(cell.toString());
                     }
                 }
-
-
-
             }
-            data.put(rowCnt, obj);
+            Data.put(rowCnt, obj);
             rowCnt++;
         }
-        
-        data_set = data;
-        return data;
+
+        PrintStream o = new PrintStream(new File("A.txt"));
+
+        PrintStream console = System.out;
+
+        System.setOut(o);
+
+        data_set = Data;
+        JSONObject json = new JSONObject(Data);
+        System.out.println(json);
+        return json;
     }
     
     private static List<Integer> getFilterOutput(Map<Integer, List<String>> data, String filter) {

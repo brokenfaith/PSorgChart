@@ -17,11 +17,11 @@ public class psOrgChartFrame extends javax.swing.JFrame {
     /**
      * Creates new form psOrgChartFrame
      */
-    /*We should probably pass the data here for the init*/
+    /*We should probably pass the Data here for the init*/
     //Map<Integer, List<String>> DataSet
     public psOrgChartFrame() {
         initComponents();
-        GenerateOrgChart(/* DataSet */);
+//        GenerateOrgChart(/* DataSet */);
     }
     
      public psOrgChartFrame(Map<Integer, List<Integer>> data_sort, Map<Integer, List<String>> data) {

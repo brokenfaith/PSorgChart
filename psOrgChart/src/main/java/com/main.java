@@ -25,7 +25,7 @@ public class main {
     public static void main(String[] args) {
         excellReading.LoadDataSet(INPUT_XLS);
         
-        com.psOrgChartFrame frame = new com.psOrgChartFrame(excellReading.GetSortedData(), excellReading.GetRawData());
+//        com.psOrgChartFrame frame = new com.psOrgChartFrame(excellReading.GetSortedData(), excellReading.GetRawData());
         
     };
 
