@@ -1,18 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
-<link href="getorgchart.css" rel="stylesheet" />
-</head>
-<body>
-
-<div class="content">
-  <h1>Responsive Organization Chart</h1>
-  <div id="orgchart"></div>
-
-  
-  <script src="getorgchart.js"></script>
-  <script type='text/javascript'>
-  var data_set = {
+var data_set = {
     	"154": ["C3XOCV8UF", "Gulati, Hardeep S", "Blank", "Blank", "General and Administrative", "CEO Admin", "Chief Executive Officer", "Folsom, CA", "USA", "01-Aug-2015", "01-Aug-2015", "Executive"],
 	"88": ["2AQCMVXSF", "Schlosser, Christopher", "Kiely, Evan", "0IKB6VD3C", "General and Administrative", "Finance", "Financial Analyst", "Austin, TX - People Admin", "USA", "05-Sep-2017", "01-Aug-2018", "HPEL"],
 	"89": ["Z6X8ZF8YK", "Shults, Austin", "Garcia, Candice", "MB87TL0HB", "General and Administrative", "Finance", "Accounts Receivable Specialist", "Austin, TX - People Admin", "USA", "26-Sep-2016", "01-Aug-2018", "HPEL"],
@@ -250,17 +236,55 @@ while(Object.keys(data_set).length < lastCount && Object.keys(data_set).length >
     console.log(Object.keys(data_set).length);
     console.log(lastCount);
 }
-  
-  
-  
-  
-        var orgchart = new getOrgChart(document.getElementById("orgchart"), {
-        theme: "vivian",
-        dataSource: dataset
-    });
-  </script>
-</div>
 
 
-</body>
-</html>
+
+/*
+for(var key in data_set) {
+    var keyData = KeyToData(key, data_set, parentval);
+    if(keyData != false)
+        parentval = keyData;
+}
+
+console.log(parentval);
+
+for(var key in data_set) {
+    var keyData = KeyToData(key, data_set, parentval);
+    if(keyData != false)
+        parentval = keyData;
+}
+
+console.log(parentval);
+
+for(var key in data_set) {
+    var keyData = KeyToData(key, data_set, parentval);
+    if(keyData != false)
+        parentval = keyData;
+}
+
+console.log(parentval);
+
+for(var key in data_set) {
+    var keyData = KeyToData(key, data_set, parentval);
+    if(keyData != false)
+        parentval = keyData;
+}
+
+console.log(parentval);*/
+
+//console.log(parentval);
+//console.log(parentvalId);
+
+//for(var key in data_set) {
+   // KeyToData(key, data_set, "C3XOCV8UF");
+//}
+
+for(var key in dataset) {
+    console.log(dataset[key]);
+}
+
+//console.log(Object.keys(data_set).length);
+
+
+
+

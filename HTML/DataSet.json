@@ -1,19 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
-<link href="getorgchart.css" rel="stylesheet" />
-</head>
-<body>
-
-<div class="content">
-  <h1>Responsive Organization Chart</h1>
-  <div id="orgchart"></div>
-
-  
-  <script src="getorgchart.js"></script>
-  <script type='text/javascript'>
-  var data_set = {
-    	"154": ["C3XOCV8UF", "Gulati, Hardeep S", "Blank", "Blank", "General and Administrative", "CEO Admin", "Chief Executive Officer", "Folsom, CA", "USA", "01-Aug-2015", "01-Aug-2015", "Executive"],
+{
 	"88": ["2AQCMVXSF", "Schlosser, Christopher", "Kiely, Evan", "0IKB6VD3C", "General and Administrative", "Finance", "Financial Analyst", "Austin, TX - People Admin", "USA", "05-Sep-2017", "01-Aug-2018", "HPEL"],
 	"89": ["Z6X8ZF8YK", "Shults, Austin", "Garcia, Candice", "MB87TL0HB", "General and Administrative", "Finance", "Accounts Receivable Specialist", "Austin, TX - People Admin", "USA", "26-Sep-2016", "01-Aug-2018", "HPEL"],
 	"110": ["CIW43B69F", "de la Fuente, Jorge", "Eisenhart, Wallace", "I549AEEOQ", "General and Administrative", "Information Technology", "Network Engineer", "Bethlehem, PA", "USA", "07-Dec-1987", "31-Jan-2017", "Professional"],
@@ -120,6 +105,7 @@
 	"151": ["MOR55LNDW", "Arjun, Saniya", "Kumar, Anil", "E1AETXDTA", "General and Administrative", "Human Resources", "Recruiter", "Bengaluru, India", "IND", "12-Mar-2018", "12-Mar-2018", "Professional"],
 	"152": ["XB8985C1J", "Cavanna, Robert H", "Ballantyne, Steven", "5CQTQBTUR", "General and Administrative", "CEO Admin", "Director, Business Operations", "Folsom, CA", "USA", "23-May-2005", "02-Jun-2006", "HPEL"],
 	"153": ["KMT9B8X40", "Ellis, Trena D", "Otto, Volker", "22JXJZXXH", "General and Administrative", "Facilities", "Director, Facilities & End User Services", "Folsom, CA", "USA", "08-May-2000", "02-Jun-2006", "Management"],
+	"154": ["C3XOCV8UF", "Gulati, Hardeep S", "Blank", "Blank", "General and Administrative", "CEO Admin", "Chief Executive Officer", "Folsom, CA", "USA", "01-Aug-2015", "01-Aug-2015", "Executive"],
 	"155": ["70DPBZOCW", "Oldemeyer, Mark E", "Gulati, Hardeep", "C3XOCV8UF", "General and Administrative", "Finance", "Chief Financial Officer", "Folsom, CA", "USA", "01-Aug-2015", "01-Aug-2015", "Executive"],
 	"156": ["ZJVNO8GVQ", "Kaminski, Michael E", "Oldemeyer, Mark", "70DPBZOCW", "General and Administrative", "Finance", "Vice President, Controller", "Folsom, CA", "USA", "03-Aug-2015", "01-Aug-2015", "Executive"],
 	"50": ["XCJ0716RE", "Lara-Lopez, Jesus", "Roberts, Dennis", "6F6WC0RLD", "General and Administrative", "Finance", "Accounting Intern", "Folsom, CA", "USA", "12-Jun-2017", "12-Jun-2017", "HPEL"],
@@ -171,96 +157,3 @@
 	"86": ["1ZV09NH7W", "Smith, Ashley", "Kaminski, Michael", "ZJVNO8GVQ", "General and Administrative", "Finance", "Revenue Manager", "Chicago, IL", "USA", "08-Jun-2015", "01-Aug-2018", "Management"],
 	"87": ["ZTEM786X3", "Wareham, Michael", "Fanous, Ziad", "A4B9XJMAU", "General and Administrative", "Finance", "Assistant Controller", "Austin, TX - People Admin", "USA", "10-Apr-2017", "01-Aug-2018", "Management"]
 }
-
-delete data_set[0];
-
-
-//JSON Dataset = Filter Out For Parent
-var dataset = [];
-function filterItems(query) {
-  return dataset.filter(function(el) {
-      return el.objId.indexOf(query) > -1;
-  })[0]
-}
-//console.log(Object.keys(data_set).length);
-// Return Id, ParentID, Name, Title
-function KeyToData(key, data_set, parentcode) {
-    if(dataset.length > 0) {
-        var obj = data_set[key];
-        var name = obj[1];
-        var title = obj[6]
-        var parentset = filterItems(obj[3]);
-        
-        if(parentset != null) {
-            var id = parentset.id;
-            console.log(name);
-            console.log(title);
-            console.log(parentset);
-            delete data_set[key];
-            var newObj = { id: parseInt(key), parentId:id, Name: name, objId:obj[0], Title: title}
-            console.log(newObj);
-            dataset.push(newObj);
-        }
-
-        console.log(obj[3]);
-    }
-    else
-    {
-        var obj = data_set[key];
-        var name = obj[1];
-        var title = obj[6]
-        //console.log(name + ": " + title);
-        if( obj[3] == parentcode) {
-            console.log(obj[3])
-            delete data_set[key];
-            var newObj = { id: parseInt(key), parentId:null, Name: name, objId:obj[0], Title: title}
-        
-            dataset.push(newObj);
-            console.log(newObj)
-        
-            return obj[0];
-        }
-    }
-    
-    return false;
-}
-
-var parentval = "Blank";
-var parentvalId = null;
-
-function ConvertJSONToOrg() {
-    for(var key in data_set) {
-        var keyData = KeyToData(key, data_set, parentval);
-        if(keyData != false)
-            parentval = keyData;
-    }
-}
-
-
-
-var lastCount = 999999;
-
-while(Object.keys(data_set).length < lastCount && Object.keys(data_set).length > 0) {
-    lastCount = Object.keys(data_set).length;
-    ConvertJSONToOrg();
-    console.log("test");
-    console.log(parentval);
-    console.log(Object.keys(data_set).length > 0);
-    console.log(Object.keys(data_set).length < lastCount);
-    console.log(Object.keys(data_set).length);
-    console.log(lastCount);
-}
-  
-  
-  
-  
-        var orgchart = new getOrgChart(document.getElementById("orgchart"), {
-        theme: "vivian",
-        dataSource: dataset
-    });
-  </script>
-</div>
-
-
-</body>
-</html>
